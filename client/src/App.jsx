@@ -48,7 +48,10 @@ function App() {
       setError("");
       setAnalysis(null);
 
-      const res = await axios.post("http://localhost:5000/upload", formData);
+      const res = await axios.post(
+        "https://ai-resume-analyzer-3une.onrender.com/upload",
+        formData,
+      );
 
       setAnalysis(res.data.analysis);
     } catch (err) {
