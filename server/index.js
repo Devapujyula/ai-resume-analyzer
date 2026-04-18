@@ -84,7 +84,14 @@ ${jobDesc}
     return parsed;
   } catch (error) {
     console.log("AI Error:", error.message);
-    return "AI analysis failed";
+    return {
+      score: 0,
+      strengths: ["AI failed to analyze"],
+      weaknesses: ["Check API key or AI response"],
+      missingSkills: ["Unknown"],
+      matchScore: 0,
+      missingKeywords: ["Unknown"],
+    };
   }
 }
 
