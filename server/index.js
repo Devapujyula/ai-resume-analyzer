@@ -112,6 +112,8 @@ app.post("/upload", upload.single("resume"), async (req, res) => {
       });
     }
 
+    console.log("API KEY:", process.env.OPENROUTER_API_KEY);
+
     const buffer = req.file.buffer;
 
     // ✅ correct usage
