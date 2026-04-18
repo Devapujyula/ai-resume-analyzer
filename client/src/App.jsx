@@ -49,7 +49,7 @@ function App() {
       setAnalysis(null);
 
       const res = await axios.post(
-        "https://ai-resume-analyzer1-06w4.onrender.com/upload",
+        "https://ai-resume-analyzer-u8pu.onrender.com/upload",
         formData,
       );
 
