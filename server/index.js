@@ -1,3 +1,4 @@
+console.log("ENV CHECK:", process.env.OPENROUTER_API_KEY);
 const pdfParse = require("pdf-parse");
 const multer = require("multer");
 const express = require("express");
