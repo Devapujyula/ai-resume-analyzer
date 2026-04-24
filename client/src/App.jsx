@@ -48,7 +48,10 @@ function App() {
       setError("");
       setAnalysis(null);
 
-      const res = await axios.post("http://localhost:5000/upload", formData);
+      const res = await axios.post(
+        "https://ai-resume-analyzer-nfj5.onrender.com/upload",
+        formData,
+      );
 
       console.log("FULL RESPONSE:", res.data);
 
