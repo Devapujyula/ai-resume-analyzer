@@ -28,7 +28,7 @@ async function analyzeResumeWithAI(text, jobDesc) {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "openai/gpt-3.5-turbo",
+        model: "openai/gpt-4o-mini",
         messages: [
           {
             role: "user",
@@ -83,7 +83,7 @@ ${jobDesc}
 
     return parsed;
   } catch (error) {
-    console.log("AI Error:", error.message);
+    console.log("AI FULL ERROR:", error.response?.data || error.message);
     return {
       score: 0,
       strengths: ["AI failed to analyze"],
