@@ -100,9 +100,18 @@ app.use(cors());
 // json body parse cheyyataniki
 app.use(express.json());
 
-// simple test routing edhi
 app.get("/", (req, res) => {
   res.send("Resume Analyzer backend is running");
+});
+
+// diagnostic endpoint — visit this URL to check if everything is configured correctly
+app.get("/health", (req, res) => {
+  res.json({
+    status: "ok",
+    apiKeySet: !!process.env.OPENROUTER_API_KEY,
+    timestamp: new Date().toISOString(),
+    node: process.version,
+  });
 });
 
 app.post("/upload", upload.single("resume"), async (req, res) => {
