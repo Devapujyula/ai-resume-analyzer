@@ -51,6 +51,7 @@ function App() {
       const res = await axios.post(
         "https://ai-resume-analyzer-nfj5.onrender.com/upload",
         formData,
+        { timeout: 120000 },
       );
 
       console.log("FULL RESPONSE:", res.data);
@@ -69,6 +70,9 @@ function App() {
     return (
       <div style={{ marginTop: "20px", color: "blue" }}>
         <p>🔄 Analyzing your resume... Please wait</p>
+        <p style={{ fontSize: "12px", color: "#888" }}>
+          First request may take up to 60 seconds if the server is waking up.
+        </p>
       </div>
     );
   };
@@ -95,6 +99,7 @@ function App() {
 
         <input
           type="file"
+          accept="application/pdf"
           onChange={handleFileChange}
           disabled={loading}
           style={{ marginTop: "20px" }}

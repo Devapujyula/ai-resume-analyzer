@@ -1,10 +1,8 @@
 require("dotenv").config();
-console.log("ENV CHECK:", process.env.OPENROUTER_API_KEY);
 const pdfParse = require("pdf-parse");
 const multer = require("multer");
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 
 // file ni RAM lo store chesthundhi temporary processing ki best and manam later PDF parse chestham so disk lo save avvalsina avasaram ledhu
 const storage = multer.memoryStorage();
@@ -109,6 +107,10 @@ app.get("/", (req, res) => {
 
 app.post("/upload", upload.single("resume"), async (req, res) => {
   try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
     if (req.file.mimetype !== "application/pdf") {
       return res.status(400).json({
         error: "Only PDF files are allowed",
@@ -121,11 +123,8 @@ app.post("/upload", upload.single("resume"), async (req, res) => {
       });
     }
 
-    console.log("API KEY:", process.env.OPENROUTER_API_KEY);
-
     const buffer = req.file.buffer;
 
-    // ✅ correct usage
     const data = await pdfParse(buffer);
 
     const rawText = data.text;
@@ -145,8 +144,8 @@ app.post("/upload", upload.single("resume"), async (req, res) => {
       analysis: aiResult,
     });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "PDF parsing failed" });
+    console.log("Upload error:", error.message);
+    res.status(500).json({ error: "Failed to process the file. Please try again." });
   }
 });
 
